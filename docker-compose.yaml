@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  php:
+    image: shin1x1/php-dev:8.2-fpm-buster
+    volumes:
+      - ./backend/:/var/www/html
+    working_dir: /var/www/html
+  composer:
+    image: composer:latest
+    volumes:
+      - ./backend:/var/www/html
+    working_dir: /var/www/html
