@@ -57,7 +57,7 @@ class Project extends Model
      * @var array
      */
     protected $with = [
-        //
+        'tasks'
     ];
 
     /**
@@ -67,6 +67,8 @@ class Project extends Model
      */
     public function tasks()
     {
-        return $this->hasMany(ProjectTask::class);
+        return $this->hasMany(
+            ProjectTask::class,
+        );
     }
 }
