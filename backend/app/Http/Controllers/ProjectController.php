@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\DeletedResponse;
 use App\Http\Responses\UpdatedResponse;
 use App\Models\Project;
 use App\Transformers\ProjectTransformer;
@@ -51,7 +52,10 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return fractal(
+            $project,
+            new ProjectTransformer(),
+        )->respond();
     }
 
     /**
@@ -67,6 +71,6 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        return new DeletedResponse();
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Transformers;
 
 use App\Models\ProjectTask;
-use League\Fractal\TransformerAbstract;
+use App\Support\Fractal\AbstractAppTransformer;
 
-class ProjectTaskTransformer extends TransformerAbstract
+class ProjectTaskTransformer extends AbstractAppTransformer
 {
     /**
      * List of resources to automatically include

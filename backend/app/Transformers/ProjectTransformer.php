@@ -2,9 +2,11 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
+use App\Models\Project;
+use App\Support\Fractal\AbstractAppTransformer;
+use League\Fractal\Resource\Collection;
 
-class ProjectTransformer extends TransformerAbstract
+class ProjectTransformer extends AbstractAppTransformer
 {
     /**
      * List of resources to automatically include
@@ -12,7 +14,7 @@ class ProjectTransformer extends TransformerAbstract
      * @var array
      */
     protected array $defaultIncludes = [
-        //
+        'tasks',
     ];
 
     /**
@@ -29,10 +31,23 @@ class ProjectTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform()
+    public function transform(Project $project)
     {
         return [
-            //
+            'id' => $project->id,
+            'name' => $project->name,
+            'description' => $project->description,
         ];
+    }
+
+    /**
+     * タスクリスト
+     *
+     * @param Project $project
+     * @return Collection
+     */
+    public function includeTasks(Project $project): Collection
+    {
+        return $this->collection($project->tasks, new ProjectTaskTransformer());
     }
 }

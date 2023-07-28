@@ -27,7 +27,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::factory()->createOne();
+
+        return (new UserResource($user))
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -35,9 +39,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return (new UserResource($user))
-            ->response()
-            ->setStatusCode(201);
+        return (new UserResource($user));
     }
 
     /**
